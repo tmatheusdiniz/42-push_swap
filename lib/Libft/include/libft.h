@@ -79,8 +79,9 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
-//Utils_bits
-int	ft_count_bits(long long number);
+// Utils
+int		ft_atoi_base(char *str, char *base);
+int		ft_count_bits(long long number);
 
 //Bonus
 
