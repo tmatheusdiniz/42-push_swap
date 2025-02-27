@@ -40,4 +40,7 @@ typedef struct s_cost_index
 	int	index;
 }	t_cost_index;
 
+// Core
+int	main(int c, char **str);
+
 #endif
