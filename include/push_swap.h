@@ -43,4 +43,13 @@ typedef struct s_cost_index
 // Core
 int	main(int c, char **str);
 
+// Parse
+int	check_errors(t_stack *stack_a, char **str);
+
+// Errors
+void	error_handler(t_stack *stack_a, t_stack *stack_b, int flag);
+
+// Utils
+int	ft_atoi_check(char *nptr);
+
 #endif

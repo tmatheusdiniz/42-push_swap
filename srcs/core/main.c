@@ -12,7 +12,16 @@
 
 #include "../../include/push_swap.h"
 
-t_stack	
+t_stack *create_stack(t_stack *stack_a, t_stack *stack_b, int v, char **str)
+{
+	if (v < 2 || (v == 2 && !str[1][0]))
+		error_handler(stack_a, stack_b, 1);
+	if (v == 2)
+		str = ft_split(str[1], ' ');
+	if (check_errors(stack_a, str))
+		error_handler(stack_a, stack_b, 1);
+}
+
 int	main(int v, char **str)
 {
 	t_stack	*stack_a;
@@ -20,8 +29,6 @@ int	main(int v, char **str)
 
 	stack_a = NULL;
 	stack_b = NULL;
-	if (v == 1 || (v == 2 && !str[1][0]))
-		return (1); // In the future i will add other approach for this.
-	if (v == 2)
-		
+	stack_a = create_stack(stack_a, stack_b, v, str);
+	return (0);
 }
