@@ -30,7 +30,7 @@ t_stack	*last_node(t_stack *stack)
 	return (stack);
 }
 
-int	count_stack(t_stack *stack)
+int	stack_len(t_stack *stack)
 {
 	int	count;
 
@@ -42,4 +42,17 @@ int	count_stack(t_stack *stack)
 		stack = stack->next;
 	}
 	return (count);
+}
+
+int	stack_sorted(t_stack *stack)
+{
+	if (!stack || !stack->next)
+		return (-1);
+	while (stack->next)
+	{
+		if (stack->next->nbr > stack->nbr)
+			return (1);
+		stack = stack->next;
+	}
+	return (0);
 }

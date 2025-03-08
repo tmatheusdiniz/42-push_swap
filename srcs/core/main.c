@@ -31,5 +31,12 @@ int	main(int v, char **str)
 	stack_a = NULL;
 	stack_b = NULL;
 	stack_a = create_stack(stack_a, stack_b, v, str);
+	if (!stack_sorted(stack_a))
+	{
+		if (stack_len(stack_a) == 2)
+			op_swap(&stack_a, SA);
+		if (stack_len(stack_a) == 3)
+			sort_three(&stack_a);
+	}
 	return (0);
 }

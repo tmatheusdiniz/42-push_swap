@@ -50,9 +50,14 @@ int		main(int c, char **str);
 int		check_errors(t_stack **stack_a, char **str);
 
 // Stack
+int		stack_len(t_stack *stack);
+int		stack_sorted(t_stack *stack);
 t_stack	*first_node(t_stack *stack);
 t_stack	*last_node(t_stack *stack);
 t_stack	*add_node_front(t_stack *stack, int content);
+
+// Sort
+void	sort_three(t_stack **stack);
 
 // Operations
 int		op_pa(t_stack **stack_a, t_stack **stack_b);
@@ -68,6 +73,8 @@ int		op_rev_r_rotate(t_stack **stack_a, t_stack **stack_b);
 void	error_handler(t_stack *stack_a, t_stack *stack_b, int flag);
 
 // Utils
+t_stack	*find_max(t_stack *stack);
+t_stack	*find_min(t_stack *stack);
 int		ft_atoi_check(char *nptr);
 
 #endif
