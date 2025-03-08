@@ -15,15 +15,18 @@
 void	aux_check_dup(char **str, int *count, int *max_int, int *min_int)
 {
 	int	temp;
+	int	aux;
 
-	while (str[*count])
+	aux = 1;
+	while (str[*count + 1])
 	{
-		temp = ft_atoi(str[(*count)++]);
+		temp = ft_atoi(str[aux]);
 		if (temp < *min_int)
 			*min_int = temp;
 		if (temp > *max_int)
 			*max_int = temp;
-		(*count) ++;
+		(*count)++;
+		aux ++;
 	}
 }
 
@@ -42,10 +45,10 @@ int	check_dup(char **str)
 	hash_tab = ft_calloc(max_int - min_int + 1, sizeof(char));
 	if (!hash_tab)
 		return (1);
-	max_int = 0;
-	while (max_int < count)
+	max_int = 1;
+	while (count-- > 0)
 	{
-		int	temp = ft_atoi(str[max_int]);
+		temp = ft_atoi(str[max_int]);
 		if (hash_tab[temp - min_int])
 			return (free(hash_tab), 1);
 		hash_tab[temp - min_int] = 1;
@@ -58,14 +61,16 @@ int	check_errors(t_stack **stack_a, char **str)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	if (check_dup(str))
 		return (1);
 	while (str[i])
 	{
-		if (!ft_atoi_check(str[i]) && ft_atoi(str[i]) != 0)
+		if (ft_atoi_check(str[i]) == 4)
 			return (1);
 		*stack_a = add_node_front(*stack_a, ft_atoi(str[i]));
+		if (!(*stack_a))
+			return (1);
 		i ++;
 	}
 	return (0);

@@ -29,8 +29,8 @@ static int	ft_count_bits_aux(long long number)
 
 int	ft_atoi_check(char *nptr)
 {
-	int			i;
-	int			sign;
+	int				i;
+	int				sign;
 	long long int	res;
 
 	i = 0;
@@ -47,10 +47,10 @@ int	ft_atoi_check(char *nptr)
 	while (nptr[i])
 	{
 		if (!ft_isdigit(nptr[i]))
-			return (0);
+			return (4);
 		res = res * 10 + nptr[i++] - '0';
 	}
 	if (ft_count_bits_aux(res) > 32)
-		return (0);
+		return (4);
 	return (res * sign);
 }
