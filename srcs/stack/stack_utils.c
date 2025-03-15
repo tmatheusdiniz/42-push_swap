@@ -48,6 +48,7 @@ int	stack_sorted(t_stack *stack)
 {
 	if (!stack || !stack->next)
 		return (-1);
+	stack = first_node(stack);
 	while (stack->next)
 	{
 		if (stack->next->nbr > stack->nbr)

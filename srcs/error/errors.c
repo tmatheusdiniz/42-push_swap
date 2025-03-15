@@ -33,7 +33,7 @@ static void	clean_stack(t_stack *stack)
 	}
 }
 
-void	error_handler(t_stack *stack_a, t_stack *stack_b, int flag)
+void	exit_handler(t_stack *stack_a, t_stack *stack_b, int flag)
 {
 	if (stack_a)
 		clean_stack(stack_a);

@@ -28,3 +28,20 @@ t_stack	*find_max(t_stack *stack)
 	}
 	return (save);
 }
+
+t_stack	*find_min(t_stack *stack)
+{
+	t_stack	*save;
+
+	if (!stack || !stack->next)
+		return (NULL);
+	stack = first_node(stack);
+	save = stack;
+	while (stack->next)
+	{
+		if (stack->next->nbr < stack->nbr)
+			save = stack->next;
+		stack = stack->next;
+	}
+	return (save);
+}

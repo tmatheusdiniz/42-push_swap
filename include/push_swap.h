@@ -58,6 +58,7 @@ t_stack	*add_node_front(t_stack *stack, int content);
 
 // Sort
 void	sort_three(t_stack **stack);
+void	sort_all(t_stack **stack, t_cost_index **info);
 
 // Operations
 int		op_pa(t_stack **stack_a, t_stack **stack_b);
@@ -70,7 +71,7 @@ int		op_r_rotate(t_stack **stack_a, t_stack **stack_b);
 int		op_rev_r_rotate(t_stack **stack_a, t_stack **stack_b);
 
 // Errors
-void	error_handler(t_stack *stack_a, t_stack *stack_b, int flag);
+void	exit_handler(t_stack *stack_a, t_stack *stack_b, int flag);
 
 // Utils
 t_stack	*find_max(t_stack *stack);

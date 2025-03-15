@@ -15,18 +15,19 @@
 t_stack	*create_stack(t_stack *stack_a, t_stack *stack_b, int v, char **str)
 {
 	if (v < 2 || (v == 2 && !str[1][0]))
-		error_handler(stack_a, stack_b, 1);
+		exit_handler(stack_a, stack_b, 1);
 	if (v == 2)
 		str = ft_split(str[1], ' ');
 	if (check_errors(&stack_a, str))
-		error_handler(stack_a, stack_b, 0);
+		exit_handler(stack_a, stack_b, 0);
 	return (stack_a);
 }
 
 int	main(int v, char **str)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	t_stack			*stack_a;
+	t_stack			*stack_b;
+	t_cost_index	*info;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -35,8 +36,11 @@ int	main(int v, char **str)
 	{
 		if (stack_len(stack_a) == 2)
 			op_swap(&stack_a, SA);
-		if (stack_len(stack_a) == 3)
+		else if (stack_len(stack_a) == 3)
 			sort_three(&stack_a);
+		else
+			sort_all(&stack_a, &info);
 	}
+	exit_handler(stack_a, stack_b, 1);
 	return (0);
 }
