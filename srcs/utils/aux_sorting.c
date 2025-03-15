@@ -13,7 +13,23 @@
 #include "../../include/push_swap.h"
 #include <limits.h>
 
-void	current_index(t_stack *stack)
+static void	current_index(t_stack *stack);
+static void	set_target_a(t_stack *stack_a, t_stack *stack_b);
+static void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b);
+static void	set_cheapest(t_stack *stack_a, t_stack *stack_b);
+
+void	init_node_a(t_stack *stack_a, t_stack *stack_b)
+{
+	if (!stack_a || !stack_b)
+		return ;
+	current_index(stack_a);
+	current_index(stack_b);
+	set_target_a(stack_a, stack_b);
+	cost_analysis_a(stack_a, stack_b);
+	set_cheapest(stack_a, stack_b);
+}
+
+static void	current_index(t_stack *stack)
 {
 	int	i;
 	int	median;
@@ -34,7 +50,7 @@ void	current_index(t_stack *stack)
 	}
 }
 
-void	set_target_a(t_stack *stack_a, t_stack *stack_b)
+static void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 {
 	if (!stack_a || !stack_b)
 		return ;
@@ -63,7 +79,7 @@ void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b)
+static void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b)
 {
 	int	length_a;
 	int	length_b;
@@ -81,7 +97,7 @@ void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-void	set_cheapest(t_stack *stack_a, t_stack *stack_b)
+static void	set_cheapest(t_stack *stack_a, t_stack *stack_b)
 {
 	long	cheapest_v;
 	t_stack	*cheapest_node;

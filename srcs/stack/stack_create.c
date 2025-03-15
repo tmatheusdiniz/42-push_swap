@@ -22,6 +22,8 @@ static t_stack	*create_node(int content)
 	new_node->nbr = content;
 	new_node->next = NULL;
 	new_node->prev = NULL;
+	new_node->info->cheapest = 0;
+	new_node->target_node = NULL;
 	return (new_node);
 }
 

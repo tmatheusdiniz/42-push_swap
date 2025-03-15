@@ -27,7 +27,6 @@ int	main(int v, char **str)
 {
 	t_stack			*stack_a;
 	t_stack			*stack_b;
-	t_cost_index	*info;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -39,7 +38,7 @@ int	main(int v, char **str)
 		else if (stack_len(stack_a) == 3)
 			sort_three(&stack_a);
 		else
-			sort_all(&stack_a, &info);
+			sort_all(&stack_a, &stack_b);
 	}
 	exit_handler(stack_a, stack_b, 1);
 }

@@ -30,18 +30,22 @@
 # define RRB 10
 # define RRR 11
 
-typedef struct s_stack
-{
-	long			nbr;
-	struct s_stack	*next;
-	struct s_stack	*prev;
-}	t_stack;
-
 typedef struct s_cost_index
 {
 	int	cost;
+	int	cheapest;
 	int	index;
+	int	above_median;
 }	t_cost_index;
+
+typedef struct s_stack
+{
+	long			nbr;
+	struct s_stack	*target_node;
+	struct s_stack	*next;
+	struct s_stack	*prev;
+	t_cost_index	*info;
+}	t_stack;
 
 // Core
 int		main(int c, char **str);
@@ -58,7 +62,7 @@ t_stack	*add_node_front(t_stack *stack, int content);
 
 // Sort
 void	sort_three(t_stack **stack);
-void	sort_all(t_stack **stack, t_cost_index **info);
+void	sort_all(t_stack **stack_a, t_stack **stack_b);
 
 // Operations
 int		op_pa(t_stack **stack_a, t_stack **stack_b);
@@ -77,5 +81,6 @@ void	exit_handler(t_stack *stack_a, t_stack *stack_b, int flag);
 t_stack	*find_max(t_stack *stack);
 t_stack	*find_min(t_stack *stack);
 int		ft_atoi_check(char *nptr);
+void	init_node_a(t_stack *stack_a, t_stack *stack_b);
 
 #endif
