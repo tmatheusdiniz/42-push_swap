@@ -22,7 +22,7 @@ t_stack	*find_max(t_stack *stack)
 	save = stack;
 	while (stack->next)
 	{
-		if (stack->next->nbr > stack->nbr)
+		if (stack->next->nbr > save->nbr)
 			save = stack->next;
 		stack = stack->next;
 	}
@@ -39,7 +39,7 @@ t_stack	*find_min(t_stack *stack)
 	save = stack;
 	while (stack->next)
 	{
-		if (stack->next->nbr < stack->nbr)
+		if (stack->next->nbr < save->nbr)
 			save = stack->next;
 		stack = stack->next;
 	}

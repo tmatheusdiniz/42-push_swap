@@ -34,6 +34,7 @@ int	stack_len(t_stack *stack)
 {
 	int	count;
 
+	count = 1;
 	if (!stack || !stack->next)
 		return (-1);
 	while (stack->next)
@@ -51,9 +52,9 @@ int	stack_sorted(t_stack *stack)
 	stack = first_node(stack);
 	while (stack->next)
 	{
-		if (stack->next->nbr > stack->nbr)
-			return (1);
+		if (stack->next->nbr < stack->nbr)
+			return (0);
 		stack = stack->next;
 	}
-	return (0);
+	return (1);
 }

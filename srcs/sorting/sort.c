@@ -26,7 +26,10 @@ void	sort_three(t_stack **stack)
 	if (biggest_node == *stack)
 		op_rotate(stack, RA);
 	if (biggest_node == (*stack)->next)
+	{
 		op_reverse_rotate(stack, RRA);
+		*stack = first_node(*stack);
+	}
 	if ((*stack)->nbr > (*stack)->next->nbr)
 		op_swap(stack, SA);
 }

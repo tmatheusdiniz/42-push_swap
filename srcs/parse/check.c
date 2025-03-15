@@ -54,10 +54,10 @@ int	check_dup(char **str)
 		hash_tab[temp - min_int] = 1;
 		++max_int;
 	}
-	return (0);
+	return (free(hash_tab), 0);
 }
 
-int	check_errors(t_stack **stack_a, char **str)
+int	check_errors(t_stack **stack, char **str)
 {
 	int	i;
 
@@ -68,10 +68,11 @@ int	check_errors(t_stack **stack_a, char **str)
 	{
 		if (ft_atoi_check(str[i]) == 4)
 			return (1);
-		*stack_a = add_node_front(*stack_a, ft_atoi(str[i]));
-		if (!(*stack_a))
+		*stack = add_node_front(*stack, ft_atoi(str[i]));
+		if (!(*stack))
 			return (1);
 		i ++;
 	}
+	(*stack) = first_node(*stack);
 	return (0);
 }

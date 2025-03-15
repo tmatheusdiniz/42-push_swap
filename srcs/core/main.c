@@ -42,5 +42,4 @@ int	main(int v, char **str)
 			sort_all(&stack_a, &info);
 	}
 	exit_handler(stack_a, stack_b, 1);
-	return (0);
 }
