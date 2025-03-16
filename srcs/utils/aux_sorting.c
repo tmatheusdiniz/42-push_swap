@@ -1,118 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aux_op.c                                           :+:      :+:    :+:   */
+/*   aux_op_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mreinald <mreinald@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/08 19:48:53 by mreinald          #+#    #+#             */
-/*   Updated: 2025/03/08 21:56:55 by mreinald         ###   ########.fr       */
+/*   Created: 2025/03/15 23:16:59 by mreinald          #+#    #+#             */
+/*   Updated: 2025/03/15 23:21:18 by mreinald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
-#include <limits.h>
 
-static void	current_index(t_stack *stack);
-static void	set_target_a(t_stack *stack_a, t_stack *stack_b);
-static void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b);
-static void	set_cheapest(t_stack *stack_a, t_stack *stack_b);
-
-void	init_node_a(t_stack *stack_a, t_stack *stack_b)
+void	min_on_top(t_stack **stack)
 {
-	if (!stack_a || !stack_b)
-		return ;
-	current_index(stack_a);
-	current_index(stack_b);
-	set_target_a(stack_a, stack_b);
-	cost_analysis_a(stack_a, stack_b);
-	set_cheapest(stack_a, stack_b);
+	while ((*stack)->nbr != find_min(*stack)->nbr)
+	{
+		if (find_min(*stack)->info->above_median)
+			op_rotate(stack, RA);
+		else
+			op_reverse_rotate(stack, RRA);
+		*stack = (*stack)->next;
+	}
 }
 
-static void	current_index(t_stack *stack)
+t_stack	*get_cheapest(t_stack *stack)
 {
-	int	i;
-	int	median;
-
 	if (!stack)
-		return ;
-	i = 0;
-	median = stack_len(stack) / 2;
+		return (NULL);
 	while (stack)
 	{
-		stack->info->index = i;
-		if (i <= median)
-			stack->info->above_median = 1;
-		else
-			stack->info->above_median = 0;
-		++ i;
+		if (stack->info->cheapest)
+			return (stack);
 		stack = stack->next;
 	}
+	return (NULL);
 }
 
-static void	set_target_a(t_stack *stack_a, t_stack *stack_b)
+void	prep_for_push(t_stack **stack, t_stack *top, char wt_stack)
 {
-	if (!stack_a || !stack_b)
-		return ;
-	t_stack	*current_b;
-	t_stack	*target;
-	long	best_number;
-
-	while (stack_a)
+	while (*stack != top) 
 	{
-		best_number = LONG_MIN;
-		current_b = stack_b;
-		while (stack_b)
+		if (wt_stack == 'a')
 		{
-			if (current_b->nbr < stack_a->nbr && current_b->nbr > best_number)
-			{
-				best_number = current_b->nbr;
-				target = current_b;
-			}
-			current_b = current_b->next;
+			if (top->info->above_median)
+				op_rotate(stack, RA);
+			else
+				op_reverse_rotate(stack, RRA);
 		}
-		if (best_number == LONG_MIN)
-			stack_a->target_node = find_max(stack_b);
-		else
-			stack_a->target_node = target;
-		stack_a = stack_a->next;
-	}
-}
-
-static void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b)
-{
-	int	length_a;
-	int	length_b;
-
-	while (stack_a)
-	{
-		stack_a->info->cost = stack_a->info->index;
-		if (!(stack_a->info->above_median))
-			stack_a->info->cost = length_a - stack_a->info->index;
-		if (stack_a->target_node->info->above_median)
-			stack_a->info->cost += stack_a->target_node->info->index;
-		else
-			stack_a->info->cost += length_b - stack_a->target_node->info->index;
-		stack_a = stack_a->next;
-	}
-}
-
-static void	set_cheapest(t_stack *stack_a, t_stack *stack_b)
-{
-	long	cheapest_v;
-	t_stack	*cheapest_node;
-
-	if (!stack_a)
-		return ;
-	cheapest_v = LONG_MAX;
-	while (stack_a)
-	{
-		if (stack_a->info->cost < cheapest_v)
+		if (wt_stack == 'b')
 		{
-			cheapest_v = stack_a->info->cost;
-			cheapest_node = stack_a;
+			if (top->info->above_median)
+				op_rotate(stack, RB);
+			else
+				op_reverse_rotate(stack, RRB);
 		}
-		stack_a = stack_a->next;
+		*stack = (*stack)->next;
 	}
-	cheapest_node->info->cheapest = 1;
 }

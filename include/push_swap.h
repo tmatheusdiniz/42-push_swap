@@ -60,9 +60,11 @@ t_stack	*first_node(t_stack *stack);
 t_stack	*last_node(t_stack *stack);
 t_stack	*add_node_front(t_stack *stack, int content);
 
-// Sort
-void	sort_three(t_stack **stack);
+// Sorting
 void	sort_all(t_stack **stack_a, t_stack **stack_b);
+void	sort_three(t_stack **stack);
+void	init_node_a(t_stack *stack_a, t_stack *stack_b);
+void	init_node_b(t_stack *stack_a, t_stack *stack_b);
 
 // Operations
 int		op_pa(t_stack **stack_a, t_stack **stack_b);
@@ -78,9 +80,12 @@ int		op_rev_r_rotate(t_stack **stack_a, t_stack **stack_b);
 void	exit_handler(t_stack *stack_a, t_stack *stack_b, int flag);
 
 // Utils
+int		ft_atoi_check(char *nptr);
+void	prep_for_push(t_stack **stack, t_stack *top, char wt_stack);
+void	current_index(t_stack *stack);
+void	min_on_top(t_stack **stack);
 t_stack	*find_max(t_stack *stack);
 t_stack	*find_min(t_stack *stack);
-int		ft_atoi_check(char *nptr);
-void	init_node_a(t_stack *stack_a, t_stack *stack_b);
+t_stack	*get_cheapest(t_stack *stack);
 
 #endif

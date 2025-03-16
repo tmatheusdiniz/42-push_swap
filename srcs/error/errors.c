@@ -22,12 +22,12 @@ static void	clean_stack(t_stack *stack)
 	t_stack	*current;
 	t_stack	*next;
 
-	current = stack;
-	while (current && current->prev)
-		current = current->prev;
+	current = first_node(stack);
 	while (current)
 	{
 		next = current->next;
+		if (current->info)
+			free (current->info);
 		free (current);
 		current = next;
 	}

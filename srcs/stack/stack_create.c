@@ -19,6 +19,9 @@ static t_stack	*create_node(int content)
 	new_node = (t_stack *)malloc(sizeof(t_stack));
 	if (!new_node)
 		return (NULL);
+    new_node->info = (t_cost_index *)malloc(sizeof(t_cost_index));
+	if (!new_node->info)
+        return (free(new_node), NULL);
 	new_node->nbr = content;
 	new_node->next = NULL;
 	new_node->prev = NULL;

@@ -13,6 +13,21 @@
 #include "../../include/push_swap.h"
 #include <limits.h>
 
+static void	set_target_a(t_stack *stack_a, t_stack *stack_b);
+static void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b);
+static void	set_cheapest(t_stack *stack);
+
+void	init_node_a(t_stack *stack_a, t_stack *stack_b)
+{
+	if (!stack_a || !stack_b)
+		return ;
+	current_index(stack_a);
+	current_index(stack_b);
+	set_target_a(stack_a, stack_b);
+	cost_analysis_a(stack_a, stack_b);
+	set_cheapest(stack_a);
+}
+
 void	current_index(t_stack *stack)
 {
 	int	i;
@@ -34,7 +49,7 @@ void	current_index(t_stack *stack)
 	}
 }
 
-void	set_target_a(t_stack *stack_a, t_stack *stack_b)
+static void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 {
 	if (!stack_a || !stack_b)
 		return ;
@@ -46,7 +61,7 @@ void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 	{
 		best_number = LONG_MIN;
 		current_b = stack_b;
-		while (stack_b)
+		while (current_b)
 		{
 			if (current_b->nbr < stack_a->nbr && current_b->nbr > best_number)
 			{
@@ -63,11 +78,13 @@ void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b)
+static void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b)
 {
 	int	length_a;
 	int	length_b;
 
+	length_a = stack_len(stack_a);
+	length_b = stack_len(stack_b);
 	while (stack_a)
 	{
 		stack_a->info->cost = stack_a->info->index;
@@ -81,22 +98,22 @@ void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-void	set_cheapest(t_stack *stack_a, t_stack *stack_b)
+static void	set_cheapest(t_stack *stack)
 {
 	long	cheapest_v;
 	t_stack	*cheapest_node;
 
-	if (!stack_a)
+	if (!stack)
 		return ;
 	cheapest_v = LONG_MAX;
-	while (stack_a)
+	while (stack)
 	{
-		if (stack_a->info->cost < cheapest_v)
+		if (stack->info->cost < cheapest_v)
 		{
-			cheapest_v = stack_a->info->cost;
-			cheapest_node = stack_a;
+			cheapest_v = stack->info->cost;
+			cheapest_node = stack;
 		}
-		stack_a = stack_a->next;
+		stack = stack->next;
 	}
 	cheapest_node->info->cheapest = 1;
 }
