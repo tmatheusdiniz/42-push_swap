@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
+#include <string.h>
 
 void	aux_check_dup(char **str, int *count, int *max_int, int *min_int)
 {
@@ -30,6 +31,32 @@ void	aux_check_dup(char **str, int *count, int *max_int, int *min_int)
 	}
 }
 
+int check_dup(char **str)
+{
+    int i, j;
+    int num1, num2;
+    
+    if (!(str[0]) || !(str[1]))
+        return (0);
+        
+    i = 1;
+    while (str[i])
+    {
+        num1 = ft_atoi(str[i]);
+        j = i + 1;
+        while (str[j])
+        {
+            num2 = ft_atoi(str[j]);
+            if (num1 == num2)
+                return (1);
+            j++;
+        }
+        i++;
+    }
+    return (0);
+}
+
+/*
 int	check_dup(char **str)
 {
 	int		count;
@@ -56,17 +83,26 @@ int	check_dup(char **str)
 	}
 	return (free(hash_tab), 0);
 }
+*/
 
 int	check_errors(t_stack **stack, char **str)
 {
-	int	i;
+	int		i;
+	int		len;
+	char	*push_s;
 
-	i = 1;
+	len = ft_strlen(str[0]);
+	push_s = ft_substr(str[0], len - 9, len);
+	if (!(strncmp(push_s, "push_swap", 9)))
+		i = 1;
+	else
+		i = 0;
+	free (push_s);
 	if (check_dup(str))
 		return (1);
 	while (str[i])
 	{
-		if (ft_atoi_check(str[i]) == 4)
+		if (ft_atoi_check(str[i]) == LONG_MAX)
 			return (1);
 		*stack = add_node_front(*stack, ft_atoi(str[i]));
 		if (!(*stack))

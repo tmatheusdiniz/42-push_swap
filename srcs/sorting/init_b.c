@@ -13,8 +13,6 @@
 #include "../../include/push_swap.h"
 #include <limits.h>
 
-static void	move_b_to_a(t_stack **stack_a, t_stack **stack_b);
-
 static void	set_target_b(t_stack *stack_a, t_stack *stack_b)
 {
 	t_stack	*current_a;
@@ -43,9 +41,10 @@ static void	set_target_b(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-static void	move_b_to_a(t_stack **stack_a, t_stack **stack_b)
+void	move_b_to_a(t_stack **stack_a, t_stack **stack_b)
 {
-	prep_for_push(stack_b, (*stack_b)->target_node, 'b');
+	prep_for_push(stack_a, (*stack_b)->target_node, 'a');
+	*stack_a = first_node(*stack_a);
 	op_pa(stack_a, stack_b);
 }
 
@@ -54,5 +53,4 @@ void	init_node_b(t_stack *stack_a, t_stack *stack_b)
 	current_index(stack_a);
 	current_index(stack_b);
 	set_target_b(stack_a, stack_b);
-	move_b_to_a(&stack_a, &stack_b);
 }

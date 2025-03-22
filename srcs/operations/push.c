@@ -21,8 +21,16 @@ int	op_pa(t_stack **stack_a, t_stack **stack_b)
 	*stack_b = first_node(*stack_b);
 	temp = *stack_b;
 	*stack_b = (*stack_b)->next;
-	(*stack_b)->prev = NULL;
-	*stack_a = first_node(*stack_a);
+	if (*stack_b)
+		(*stack_b)->prev = NULL;
+	if (*stack_a)
+		*stack_a = first_node(*stack_a);
+	if (*stack_a)
+	{
+		temp->next = *stack_a;
+		(*stack_a)->prev = temp;
+	}
+	temp->prev = NULL;
 	*stack_a = temp;
 	ft_printf("pa\n");
 	return (0);
@@ -37,8 +45,18 @@ int	op_pb(t_stack **stack_a, t_stack **stack_b)
 	*stack_a = first_node(*stack_a);
 	temp = *stack_a;
 	*stack_a = (*stack_a)->next;
-	(*stack_a)->prev = NULL;
-	*stack_b = first_node(*stack_b);
+	if (*stack_a)
+		(*stack_a)->prev = NULL;
+	if (*stack_b)
+		*stack_b = first_node(*stack_b);
+	if (*stack_b)
+	{
+		temp->next = *stack_b;
+		(*stack_b)->prev = temp;
+	}
+	else
+		temp->next = NULL;
+	temp->prev = NULL;
 	*stack_b = temp;
 	ft_printf("pb\n");
 	return (0);

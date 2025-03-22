@@ -17,10 +17,15 @@ void	min_on_top(t_stack **stack)
 	while ((*stack)->nbr != find_min(*stack)->nbr)
 	{
 		if (find_min(*stack)->info->above_median)
+		{
 			op_rotate(stack, RA);
+			*stack = first_node(*stack);
+		}
 		else
+		{
 			op_reverse_rotate(stack, RRA);
-		*stack = (*stack)->next;
+			*stack = first_node(*stack);
+		}
 	}
 }
 
@@ -39,7 +44,7 @@ t_stack	*get_cheapest(t_stack *stack)
 
 void	prep_for_push(t_stack **stack, t_stack *top, char wt_stack)
 {
-	while (*stack != top) 
+	while (*stack != top)
 	{
 		if (wt_stack == 'a')
 		{
@@ -47,6 +52,7 @@ void	prep_for_push(t_stack **stack, t_stack *top, char wt_stack)
 				op_rotate(stack, RA);
 			else
 				op_reverse_rotate(stack, RRA);
+			*stack = first_node(*stack);
 		}
 		if (wt_stack == 'b')
 		{
@@ -54,7 +60,7 @@ void	prep_for_push(t_stack **stack, t_stack *top, char wt_stack)
 				op_rotate(stack, RB);
 			else
 				op_reverse_rotate(stack, RRB);
+			*stack = first_node(*stack);
 		}
-		*stack = (*stack)->next;
 	}
 }

@@ -12,6 +12,18 @@
 
 #include "../../include/push_swap.h"
 
+void	clean_matrix(char **str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
+		free (str[i++]);
+	free (str);
+}
+
 static int	ft_count_bits_aux(long long number)
 {
 	int	count;
@@ -27,7 +39,7 @@ static int	ft_count_bits_aux(long long number)
 	return (count);
 }
 
-int	ft_atoi_check(char *nptr)
+long	ft_atoi_check(char *nptr)
 {
 	int				i;
 	int				sign;
@@ -47,10 +59,10 @@ int	ft_atoi_check(char *nptr)
 	while (nptr[i])
 	{
 		if (!ft_isdigit(nptr[i]))
-			return (4);
+			return (LONG_MAX);
 		res = res * 10 + nptr[i++] - '0';
+		if (ft_count_bits_aux(res) > 32)
+			return (LONG_MAX);
 	}
-	if (ft_count_bits_aux(res) > 32)
-		return (4);
 	return (res * sign);
 }

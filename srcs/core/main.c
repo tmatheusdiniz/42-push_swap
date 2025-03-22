@@ -11,16 +11,36 @@
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
+#include <string.h>
 
 t_stack	*create_stack(t_stack *stack_a, t_stack *stack_b, int v, char **str)
 {
+	char	*push_s;
+	int		flag;
+
+	flag = 0;
 	if (v < 2 || (v == 2 && !str[1][0]))
 		exit_handler(stack_a, stack_b, 1);
 	if (v == 2)
 		str = ft_split(str[1], ' ');
+	if (!str || !str[0] || !str[1])
+	{
+		clean_matrix(str);
+		exit(1);
+	}
+	push_s = ft_substr(str[0], ft_strlen(str[0]) - 9, ft_strlen(str[0]));
+	if (!(strncmp(push_s, "push_swap", 9)))
+		flag = 1;
 	if (check_errors(&stack_a, str))
+	{
+		if (!flag)
+			clean_matrix(str);
+		free (push_s);
 		exit_handler(stack_a, stack_b, 0);
-	return (stack_a);
+	}
+	if (flag)
+		return (free(push_s), stack_a);
+	return (free(push_s), clean_matrix(str), stack_a);
 }
 
 int	main(int v, char **str)

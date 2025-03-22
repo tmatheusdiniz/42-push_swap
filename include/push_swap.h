@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
 # include "../lib/Libft/include/libft.h"
 
 # define SA 1
@@ -80,7 +81,9 @@ int		op_rev_r_rotate(t_stack **stack_a, t_stack **stack_b);
 void	exit_handler(t_stack *stack_a, t_stack *stack_b, int flag);
 
 // Utils
-int		ft_atoi_check(char *nptr);
+void	clean_matrix(char **str);
+void	move_b_to_a(t_stack **stack_a, t_stack **stack_b);
+long	ft_atoi_check(char *nptr);
 void	prep_for_push(t_stack **stack, t_stack *top, char wt_stack);
 void	current_index(t_stack *stack);
 void	min_on_top(t_stack **stack);

@@ -17,12 +17,32 @@ static void	move_a_to_b(t_stack **stack_a, t_stack **stack_b)
 	t_stack	*cheapest_node;
 
 	cheapest_node = get_cheapest(*stack_a);
-	if (cheapest_node->info->above_median 
-			&& cheapest_node->target_node->info->above_median)
-		op_r_rotate(stack_a, stack_b);
+	if (cheapest_node->info->above_median
+		&& cheapest_node->target_node->info->above_median)
+	{
+		while (*stack_a != cheapest_node
+			&& *stack_b != cheapest_node->target_node)
+		{
+			op_r_rotate(stack_a, stack_b);
+			*stack_a = first_node(*stack_a);
+			*stack_b = first_node(*stack_b);
+		}
+		current_index(*stack_a);
+		current_index(*stack_b);
+	}
 	else if (!(cheapest_node->info->above_median)
-			&& !(cheapest_node->target_node->info->above_median))
-		op_rev_r_rotate(stack_a, stack_b);
+		&& !(cheapest_node->target_node->info->above_median))
+	{
+		while (*stack_a != cheapest_node
+			&& *stack_b != cheapest_node->target_node)
+		{
+			op_rev_r_rotate(stack_a, stack_b);
+			*stack_a = first_node(*stack_a);
+			*stack_b = first_node(*stack_b);
+		}
+		current_index(*stack_a);
+		current_index(*stack_b);
+	}
 	prep_for_push(stack_a, cheapest_node, 'a');
 	prep_for_push(stack_b, cheapest_node->target_node, 'b');
 	op_pb(stack_a, stack_b);
@@ -34,14 +54,17 @@ void	sort_all(t_stack **stack_a, t_stack **stack_b)
 		op_pb(stack_a, stack_b);
 	if ((*stack_a)->next->next->next && !stack_sorted(*stack_a))
 		op_pb(stack_a, stack_b);
-	while ((*stack_a)->next->next->next)
+	while ((*stack_a)->next->next->next && !stack_sorted(*stack_a))
 	{
 		init_node_a(*stack_a, *stack_b);
 		move_a_to_b(stack_a, stack_b);
 	}
 	sort_three(stack_a);
 	while (*stack_b)
+	{
 		init_node_b(*stack_a, *stack_b);
+		move_b_to_a(stack_a, stack_b);
+	}
 	current_index(*stack_a);
 	min_on_top(stack_a);
 }

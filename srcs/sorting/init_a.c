@@ -19,8 +19,6 @@ static void	set_cheapest(t_stack *stack);
 
 void	init_node_a(t_stack *stack_a, t_stack *stack_b)
 {
-	if (!stack_a || !stack_b)
-		return ;
 	current_index(stack_a);
 	current_index(stack_b);
 	set_target_a(stack_a, stack_b);

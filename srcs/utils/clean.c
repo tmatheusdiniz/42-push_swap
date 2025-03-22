@@ -12,14 +12,4 @@
 
 #include "../../include/push_swap.h"
 
-void	clean_matrix(char **str)
-{
-	int	i;
 
-	i = 0;
-	if (!str)
-		return ;
-	while (str[i])
-		free (str[i++]);
-	free (str);
-}

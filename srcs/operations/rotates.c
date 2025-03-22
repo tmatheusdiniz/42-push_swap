@@ -27,7 +27,7 @@ int	op_rotate(t_stack **stack, int mov)
 	last_node(*stack)->next = first;
 	if (mov == RA)
 		ft_printf("ra\n");
-	else
+	else if (mov == RB)
 		ft_printf("rb\n");
 	return (0);
 }
@@ -47,7 +47,7 @@ int	op_reverse_rotate(t_stack **stack, int mov)
 	first_node(*stack)->prev = last;
 	if (mov == RRA)
 		ft_printf("rra\n");
-	else
+	else if (mov == RRB)
 		ft_printf("rrb\n");
 	return (0);
 }
