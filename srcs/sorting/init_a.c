@@ -49,12 +49,12 @@ void	current_index(t_stack *stack)
 
 static void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 {
-	if (!stack_a || !stack_b)
-		return ;
 	t_stack	*current_b;
 	t_stack	*target;
 	long	best_number;
 
+	if (!stack_a || !stack_b)
+		return ;
 	while (stack_a)
 	{
 		best_number = LONG_MIN;
@@ -76,23 +76,32 @@ static void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-static void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b)
+static void	cost_analysis_a(t_stack *a, t_stack *b)
 {
 	int	length_a;
 	int	length_b;
 
-	length_a = stack_len(stack_a);
-	length_b = stack_len(stack_b);
-	while (stack_a)
+	length_a = stack_len(a);
+	length_b = stack_len(b);
+	while (a)
 	{
-		stack_a->info->cost = stack_a->info->index;
-		if (!(stack_a->info->above_median))
-			stack_a->info->cost = length_a - stack_a->info->index;
-		if (stack_a->target_node->info->above_median)
-			stack_a->info->cost += stack_a->target_node->info->index;
+		if (a->info->above_median)
+			a->info->cost = a->info->index;
 		else
-			stack_a->info->cost += length_b - stack_a->target_node->info->index;
-		stack_a = stack_a->next;
+			a->info->cost = length_a - a->info->index;
+		if (a->target_node->info->above_median)
+			b->info->cost = a->target_node->info->index;
+		else
+			b->info->cost = length_b - a->target_node->info->index;
+		if ((a->info->above_median && a->target_node->info->above_median)
+			|| (!a->info->above_median && !a->target_node->info->above_median))
+		{
+			if (a->info->cost < b->info->cost)
+				a->info->cost = b->info->cost;
+		}
+		else
+			a->info->cost += b->info->cost;
+		a = a->next;
 	}
 }
 

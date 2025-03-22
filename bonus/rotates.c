@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/push_swap.h"
+#include "./checker.h"
 
-int	op_rotate(t_stack **stack, int mov)
+int	op_rotate(t_stack **stack)
 {
 	t_stack	*first;
 
@@ -25,14 +25,10 @@ int	op_rotate(t_stack **stack, int mov)
 	first->next = NULL;
 	first->prev = last_node(*stack);
 	last_node(*stack)->next = first;
-	if (mov == RA)
-		write(1, "ra\n", 3);
-	else if (mov == RB)
-		write(1, "rb\n", 3);
 	return (0);
 }
 
-int	op_reverse_rotate(t_stack **stack, int mov)
+int	op_reverse_rotate(t_stack **stack)
 {
 	t_stack	*last;
 
@@ -45,10 +41,6 @@ int	op_reverse_rotate(t_stack **stack, int mov)
 	last->prev = NULL;
 	last->next = first_node(*stack);
 	first_node(*stack)->prev = last;
-	if (mov == RRA)
-		write(1, "rra\n", 4);
-	else if (mov == RRB)
-		write(1, "rrb\n", 4);
 	return (0);
 }
 
@@ -57,11 +49,10 @@ int	op_r_rotate(t_stack **stack_a, t_stack **stack_b)
 	if (!stack_a || !(*stack_a) || !(*stack_a)->next
 		|| !stack_b || !(*stack_b) || !(*stack_b)->next)
 		return (-1);
-	if (op_rotate(stack_a, 0) == -1)
+	if (op_rotate(stack_a) == -1)
 		return (-1);
-	if (op_rotate(stack_b, 0) == -1)
+	if (op_rotate(stack_b) == -1)
 		return (-1);
-	write(1, "rr\n", 3);
 	return (0);
 }
 
@@ -70,10 +61,9 @@ int	op_rev_r_rotate(t_stack **stack_a, t_stack **stack_b)
 	if (!stack_a || !(*stack_a) || !(*stack_a)->next
 		|| !stack_b || !(*stack_b) || !(*stack_b)->next)
 		return (-1);
-	if (op_reverse_rotate(stack_a, 0) == -1)
+	if (op_reverse_rotate(stack_a) == -1)
 		return (-1);
-	if (op_reverse_rotate(stack_b, 0) == -1)
+	if (op_reverse_rotate(stack_b) == -1)
 		return (-1);
-	write(1, "rrr\n", 4);
 	return (0);
 }

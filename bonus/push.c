@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/push_swap.h"
+#include "./checker.h"
 
 int	op_pa(t_stack **stack_a, t_stack **stack_b)
 {
@@ -32,7 +32,6 @@ int	op_pa(t_stack **stack_a, t_stack **stack_b)
 	}
 	temp->prev = NULL;
 	*stack_a = temp;
-	write(1, "pa\n", 3);
 	return (0);
 }
 
@@ -58,6 +57,5 @@ int	op_pb(t_stack **stack_a, t_stack **stack_b)
 		temp->next = NULL;
 	temp->prev = NULL;
 	*stack_b = temp;
-	write(1, "pb\n", 3);
 	return (0);
 }

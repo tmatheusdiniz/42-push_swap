@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/push_swap.h"
-#include <string.h>
+#include "./checker.h"
 
 static int	check_dup(char **str);
 
@@ -72,7 +71,8 @@ int	check_errors(t_stack **stack, char **str)
 		i = 1;
 	else
 		i = 0;
-	free (push_s);
+	if (!(strncmp(str[1], "-c", 2)))
+		i ++;
 	if (check_dup(str))
 		return (1);
 	while (str[i])
@@ -81,9 +81,9 @@ int	check_errors(t_stack **stack, char **str)
 			return (1);
 		*stack = add_node_front(*stack, ft_atoi(str[i]));
 		if (!(*stack))
-			return (1);
+			return (free (push_s), 1);
 		i ++;
 	}
 	(*stack) = first_node(*stack);
-	return (0);
+	return (free (push_s), 0);
 }

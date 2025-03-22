@@ -16,9 +16,7 @@
 t_stack	*create_stack(t_stack *stack_a, t_stack *stack_b, int v, char **str)
 {
 	char	*push_s;
-	int		flag;
 
-	flag = 0;
 	if (v < 2 || (v == 2 && !str[1][0]))
 		exit_handler(stack_a, stack_b, 1);
 	if (v == 2)
@@ -28,17 +26,18 @@ t_stack	*create_stack(t_stack *stack_a, t_stack *stack_b, int v, char **str)
 		clean_matrix(str);
 		exit(1);
 	}
+	v = 0;
 	push_s = ft_substr(str[0], ft_strlen(str[0]) - 9, ft_strlen(str[0]));
 	if (!(strncmp(push_s, "push_swap", 9)))
-		flag = 1;
+		v = 1;
 	if (check_errors(&stack_a, str))
 	{
-		if (!flag)
+		if (!v)
 			clean_matrix(str);
 		free (push_s);
 		exit_handler(stack_a, stack_b, 0);
 	}
-	if (flag)
+	if (v)
 		return (free(push_s), stack_a);
 	return (free(push_s), clean_matrix(str), stack_a);
 }

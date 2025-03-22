@@ -26,7 +26,7 @@ static void	set_target_b(t_stack *stack_a, t_stack *stack_b)
 		while (current_a)
 		{
 			if (current_a->nbr > stack_b->nbr
-					&& current_a->nbr < best_index)
+				&& current_a->nbr < best_index)
 			{
 				best_index = current_a->nbr;
 				target_node = current_a;
