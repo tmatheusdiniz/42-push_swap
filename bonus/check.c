@@ -66,19 +66,19 @@ int	check_errors(t_stack **stack, char **str)
 	char	*push_s;
 
 	len = ft_strlen(str[0]);
-	push_s = ft_substr(str[0], len - 9, len);
-	if (!(strncmp(push_s, "push_swap", 9)))
+	push_s = ft_substr(str[0], len - 7, len);
+	if (!(strncmp(push_s, "checker", 7)))
 		i = 1;
 	else
 		i = 0;
-	if (!(strncmp(str[1], "-c", 2)))
+	if (!(strncmp(str[0], "-c", 2)) || !(strncmp(str[1], "-c", 2)))
 		i ++;
 	if (check_dup(str))
-		return (1);
+		return (free(push_s), 1);
 	while (str[i])
 	{
 		if (ft_atoi_check(str[i]) == LONG_MAX)
-			return (1);
+			return (free(push_s), 1);
 		*stack = add_node_front(*stack, ft_atoi(str[i]));
 		if (!(*stack))
 			return (free (push_s), 1);

@@ -23,8 +23,8 @@
 # define BOLD "\x1b[1m"
 # define BOLD_RED "\033[1;31m"
 # define COLOR_RED "\033[31m"
-# define COLOR_GREEN "\033[42m"
-# define COLOR_BLUE "\033[44m"
+# define COLOR_GREEN "\033[32m"
+# define COLOR_BLUE "\033[34m"
 # define RESET "\033[0m"
 
 typedef struct s_stack

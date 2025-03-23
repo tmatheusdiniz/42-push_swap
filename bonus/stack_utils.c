@@ -35,8 +35,8 @@ int	stack_len(t_stack *stack)
 	int	count;
 
 	count = 1;
-	if (!stack || !stack->next)
-		return (-1);
+	if (!stack)
+		return (0);
 	while (stack->next)
 	{
 		count ++;

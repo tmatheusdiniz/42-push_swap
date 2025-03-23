@@ -40,6 +40,7 @@ static int	aux_filter(t_stack **stack_a, t_stack **stack_b, char *line)
 		return (1);
 	return (0);
 }
+
 int	filter_op(t_stack **stack_a, t_stack **stack_b, char *line)
 {
 	*stack_a = first_node(*stack_a);

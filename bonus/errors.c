@@ -68,4 +68,3 @@ void	exit_handler(t_stack *stack_a, t_stack *stack_b, int flag)
 		write (2, "Error\n", 6);
 	exit (1);
 }
-
