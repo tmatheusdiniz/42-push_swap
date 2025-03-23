@@ -133,7 +133,7 @@ int	main(int v, char **str)
 	t_stack	*stack_b;
 
 	flag = 0;
-	if (!(strncmp(str[1], "-c", 2)))
+	if (str[1] && !(strncmp(str[1], "-c", 2)))
 		flag = 1;
 	stack_a = NULL;
 	stack_b = NULL;
